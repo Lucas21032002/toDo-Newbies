@@ -1,0 +1,178 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    transition: all .3 ease-out;
+}
+
+body {
+    background-color: #222222;
+    color: #fff;
+}
+
+body,
+input,
+button {
+    font-family: 'inter';
+    font-weight: 400;
+    font-size: 1rem;
+}
+
+
+input,
+button {
+    border-radius: 8px;
+    padding: 1rem;
+    outline: none;
+    border: none;
+}
+
+input:hover,
+button:hover {
+    cursor: pointer;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    margin-top: 108px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.new_task_form {
+    margin: 35px;
+}
+
+.tasks_counter {
+    width: 735px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+/* -------------- Counter -------------- */
+
+.tasks_created {
+    display: flex;
+}
+
+.tasks_created p {
+    color: #FFD231;
+    font-weight: 700;
+    font-family: 'inter';
+    font-size: 14px;
+}
+
+.tasks_created span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 8px;
+    width: 25px;
+    height: 19px;
+    border-radius: 999px;
+
+    background-color: #FFD231;
+}
+
+.tasks_done {
+    display: flex;
+}
+
+.tasks_done p {
+    font-weight: 700;
+    font-size: 14px;
+    font-family: 'inter';
+    color: #3EA372
+}
+
+.tasks_done span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 8px;
+    width: 25px;
+    height: 19px;
+    border-radius: 999px;
+    background-color: #3EA372;
+}
+
+.tasks_counter {
+    margin-bottom: 45px;
+}
+
+.tasks_counter div {
+    width: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-top: 10px;
+}
+
+/* -------------- Quando não tem tarefas cadastradas -------------- */
+
+.empty_tasks {
+    display: flex;
+    align-items:center;
+    margin-top: 35px;
+    justify-content: space-around;
+    width: 735px;
+}
+
+.empty_tasks div p{
+    color: rgb(163, 163, 163);
+}
+
+.empty_tasks div p:first-child{
+    font-weight: bold;
+    color: rgb(163, 163, 163);
+}
+
+/* ------------- LISTA DE TAREFAS ------------- */
+
+.done div .risked {
+    text-decoration: line-through;
+}
+
+.done .check-btn {
+    color: green;
+}
+
+.task_list {
+    max-width: 46rem;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.task_list li {
+    max-width: 735px;
+    background-color: #303030;
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-radius: 12px;
+}
+
+.left_content {
+    display: flex;
+    align-items: flex-start;
+    padding: 10px;
+    width: 100%;
+}
+
+.left_content i {
+    margin-right: 20px;
+}
+
+.hidden {
+    display: none;
+}
