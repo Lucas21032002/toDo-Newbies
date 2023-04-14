@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.0.3/src/duotone/style.css"/>
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.0.3/src/bold/style.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200&display=swap" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <img src="./assets/Group 5.png" alt="logotipo">
+    </header>
+    <main class="content">
+        <form action="" class="new_task_form">
+            <input type="text" name="" id="task_input">
+            <button type="submit" onclick="addNewTask(event)">Criar <i class="ph-bold ph-plus-circle"></i></button>
+        </form>
+        
+        <section class="tasks_counter">
+            <div class="tasks_created">
+                <p>Tarefas criadas</p>
+                <span id="counter_tasks">0</span>
+            </div>
+            <div class="tasks_done">
+                <p>Concluídas</p>
+                <span id="counter_tasks_done">0</span>
+            </div>
+        </section>
+        
+        <section class="empty_tasks hidden">
+            <img src="./assets/Group 6.png" alt="">
+            <div>
+                <p>Você ainda não possui tarefas cadastradas</p>
+                <p>Crie tarefas e organize seus itens a fazer</p>
+            </div>
+        </section>
+        
+        <ul class="task_list" id="tasks_list">
+        </ul>
+    </main>
+</body>
+<script src="./script.js"></script>
+</html>
