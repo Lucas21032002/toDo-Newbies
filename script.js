@@ -4,7 +4,7 @@ const addButton = document.getElementsByTagName('button')[0];
 const tasksList = document.getElementById('tasks_list');
 const todoCounterText = document.getElementById("counter_tasks");
 const doneCounterText = document.getElementById("counter_tasks_done");
-//const localStorageKey = 'to-do-list-key'
+const localStorageKey = 'to-do-list-key'
 
 
 //Se puder corrigir a implementação na função de contar as tarefas ja feitas, 
@@ -14,16 +14,16 @@ const doneCounterText = document.getElementById("counter_tasks_done");
 
 
 let taskData = [
-   {
-       id: randomId(),
-       name: 'Estudar um pouco',
-       toDo: true,
-   },
-   {
-       id: randomId(),
-       name: 'Estudar mais',
-       toDo: true,
-   }
+   //{
+   //    id: randomId(),
+   //    name: 'Estudar um pouco',
+   //    toDo: true,
+   //},
+   //{
+   //    id: randomId(),
+   //    name: 'Estudar mais',
+   //    toDo: true,
+   //}
 ]
 
 
@@ -38,7 +38,7 @@ function verifyEmptyTasks() {
         emptyTasks.classList.add('hidden')
     }
 }
-
+verifyEmptyTasks();
 
 
 //counter tasks
@@ -153,10 +153,15 @@ function addNewTask(event) {
     }
 
     taskData.push(newTask);
+
+    localStorage.setItem(localStorageKey, JSON.stringify(taskData));
+    console.log(taskData)
+
     const taskElement = createElement(newTask.name, newTask.id);
     tasksList.appendChild(taskElement);
 
     input.value = '';
+    verifyEmptyTasks();
     counter();
 }
 
@@ -217,36 +222,40 @@ function deleteTask(event) {
     const deleteIcon = event.target;
     const taskToDeleteId = deleteIcon.parentNode.id;
     const taskToDelete = document.getElementById(taskToDeleteId);
+   
+    //removendo do localstorage
+    let values = JSON.parse(localStorage.getItem(localStorageKey) || '[]')
+    let position = values.findIndex(x => x.id == taskToDeleteId)
+    values.splice(position, 1)
+    localStorage.setItem(localStorageKey, JSON.stringify(values));
 
-    taskData.find((item) => {
-        if(item.id === taskToDeleteId) {
-            tasksList.removeChild(taskToDelete)
-        }
-    })
+    //atualizando taskData 
+     const attTaskData = taskData.filter((item) => {
+       return item.id !== taskToDeleteId
+    });
 
-    //let values = JSON.parse(localStorage.getItem(localStorageKey) || '[]')
-    //let position = values.findIndex(x => x.id == taskToDeleteId)
-    //values.splice(position, 1)
-    //localStorage.setItem(localStorageKey, JSON.stringify(values));
-    //tasksList.removeChild(taskToDelete)
+    taskData = attTaskData;
+    tasksList.removeChild(taskToDelete)
 
     verifyEmptyTasks();
     counter();
 }
 
+
 //sync HTML with taskData 
-function showTasks() {
+//for(const task of taskData){
+//    const taskItem = createElement(task.name, task.id);
+//    tasksList.appendChild(taskItem)
+//}
 
-    for(const task of taskData){
-            const taskItem = createElement(task.name, task.id);
+console.log(taskData)
+
+function showTasks() {    
+    let values = JSON.parse(localStorage.getItem(localStorageKey) || '[]')
+    for (const task of values) {
+            let taskItem = createElement(task.name, task.id);
             tasksList.appendChild(taskItem)
+        }
     }
-
-    //let values = JSON.parse(localStorage.getItem(localStorageKey) || '[]')
-    //for (const task of values) {
-    //    let taskItem = createElement(task.name, task.id);
-    //    tasksList.appendChild(taskItem)
-    //}
-}
-
+    
 showTasks();
