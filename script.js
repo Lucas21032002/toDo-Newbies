@@ -7,34 +7,18 @@ const doneCounterText = document.getElementById("counter_tasks_done");
 const localStorageKey = 'to-do-list-key'
 
 
-//Se puder corrigir a implementação na função de contar as tarefas ja feitas, 
-//ja fiz de tudo aqui e o contador de tarefas feitas simplesmente não funciona,
-//não consegui achar meu erro.
-
-
-
-let taskData = [
-   //{
-   //    id: randomId(),
-   //    name: 'Estudar um pouco',
-   //    toDo: true,
-   //},
-   //{
-   //    id: randomId(),
-   //    name: 'Estudar mais',
-   //    toDo: true,
-   //}
-]
+let taskData = JSON.parse(localStorage.getItem(localStorageKey) || '[]')
 
 
 function verifyEmptyTasks() {
-    const emptyTasks = bannerEmpty
+    const emptyTasks = bannerEmpty;
+    let values = JSON.parse(localStorage.getItem(localStorageKey) || '[]')
 
-    if(taskData.length == 0) {
+    if(values.length == 0) {
         emptyTasks.classList.remove('hidden')
     }
 
-    if(taskData.length > 0) {
+    if(values.length > 0) {
         emptyTasks.classList.add('hidden')
     }
 }
@@ -188,12 +172,13 @@ function completeTask(event) {
     
     taskData.find((item) => {
         if(item.id === taskCompleteId) {
-            item.toDo = false
+            item.toDo = false;
         }
     })
+    localStorage.setItem(localStorageKey, JSON.stringify(taskData));
     counter();
 }
-
+console.log(taskData)
 //incomplete task
 function incompleteTask(event) {
     const doneIcon = event.target;
@@ -213,7 +198,7 @@ function incompleteTask(event) {
             item.toDo = true;
         }
     })
-
+    localStorage.setItem(localStorageKey, JSON.stringify(taskData));
     counter();
 }
 
@@ -230,7 +215,7 @@ function deleteTask(event) {
     localStorage.setItem(localStorageKey, JSON.stringify(values));
 
     //atualizando taskData 
-     const attTaskData = taskData.filter((item) => {
+    const attTaskData = taskData.filter((item) => {
        return item.id !== taskToDeleteId
     });
 
@@ -248,10 +233,9 @@ function deleteTask(event) {
 //    tasksList.appendChild(taskItem)
 //}
 
-console.log(taskData)
 
 function showTasks() {    
-    let values = JSON.parse(localStorage.getItem(localStorageKey) || '[]')
+    let values = JSON.parse(localStorage.getItem(localStorageKey))
     for (const task of values) {
             let taskItem = createElement(task.name, task.id);
             tasksList.appendChild(taskItem)
