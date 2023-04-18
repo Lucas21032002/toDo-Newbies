@@ -4,7 +4,7 @@ const addButton = document.getElementsByTagName('button')[0];
 const tasksList = document.getElementById('tasks_list');
 const todoCounterText = document.getElementById("counter_tasks");
 const doneCounterText = document.getElementById("counter_tasks_done");
-const localStorageKey = 'to-do-list-key'
+//const localStorageKey = 'to-do-list-key'
 
 
 //Se puder corrigir a implementação na função de contar as tarefas ja feitas, 
@@ -14,28 +14,27 @@ const localStorageKey = 'to-do-list-key'
 
 
 let taskData = [
-   //{
-   //    id: randomId(),
-   //    name: 'Estudar um pouco',
-   //    toDo: true,
-   //},
-   //{
-   //    id: randomId(),
-   //    name: 'Estudar mais',
-   //    toDo: true,
-   //}
+   {
+       id: randomId(),
+       name: 'Estudar um pouco',
+       toDo: true,
+   },
+   {
+       id: randomId(),
+       name: 'Estudar mais',
+       toDo: true,
+   }
 ]
 
 
 function verifyEmptyTasks() {
     const emptyTasks = bannerEmpty
-    const values = JSON.parse(localStorage.getItem(localStorageKey) || '[]')
 
-    if(values.length == 0) {
+    if(taskData.length == 0) {
         emptyTasks.classList.remove('hidden')
     }
 
-    if(values.length > 0) {
+    if(taskData.length > 0) {
         emptyTasks.classList.add('hidden')
     }
 }
@@ -46,13 +45,12 @@ function verifyEmptyTasks() {
 function counter() {
     let toDoCounter = 0;
     let doneCounter = 0;
-    const values = JSON.parse(localStorage.getItem(localStorageKey) || '[]')
   
-    toDoCounter = values.length;
+    toDoCounter = taskData.length;
     todoCounterText.innerText = `${toDoCounter}`;
   
-    for(const value of values) {
-        if(value.toDo === false){
+    for(const task of taskData) {
+        if(task.toDo === false){
             doneCounter++
         }
 }
@@ -118,37 +116,48 @@ function createElement(taskName, taskId) {
     return task;
 }
 
-function addToLocalStorage(event) {
+//function addToLocalStorage(event) {
+//    const newTaskName = input.value;
+//
+//    const newTask = {
+//        id: randomId(),
+//        name: newTaskName,
+//        toDo: true,
+//    }
+//
+//    const values = JSON.parse(localStorage.getItem(localStorageKey) || '[]')
+//    values.push(newTask)
+//
+//    localStorage.setItem(localStorageKey, JSON.stringify(values));
+//
+//    const taskElement = createElement(newTask.name, newTask.id);
+//
+//    verifyEmptyTasks();
+//    
+//    return taskElement
+//    
+//}
+
+
+//addTask
+
+function addNewTask(event) {
+    event.preventDefault();
+
     const newTaskName = input.value;
 
     const newTask = {
         id: randomId(),
         name: newTaskName,
-        toDo: true,
+        toDo: true
     }
 
-    const values = JSON.parse(localStorage.getItem(localStorageKey) || '[]')
-    values.push(newTask)
-
-    localStorage.setItem(localStorageKey, JSON.stringify(values));
-
+    taskData.push(newTask);
     const taskElement = createElement(newTask.name, newTask.id);
+    tasksList.appendChild(taskElement);
 
-    verifyEmptyTasks();
-    
-    return taskElement
-    
-}
-
-
-//addTask
-function addNewTask(event) {
-    event.preventDefault();
-    const taskElement = addToLocalStorage()
-    tasksList.appendChild(taskElement)
     input.value = '';
     counter();
-    verifyEmptyTasks();
 }
 
 
@@ -171,14 +180,12 @@ function completeTask(event) {
     const taskName = todoIcon.parentNode.childNodes[2];
     taskName.classList.add('risked')
 
-    const values = JSON.parse(localStorage.getItem(localStorageKey) || '[]')
-
-    values.find((item) => {
+    
+    taskData.find((item) => {
         if(item.id === taskCompleteId) {
             item.toDo = false
         }
     })
-    console.log(values);
     counter();
 }
 
@@ -195,15 +202,12 @@ function incompleteTask(event) {
 
     const todoIcon = doneIcon.parentNode.childNodes[0];
     todoIcon.classList.remove('hidden')
-
-    let values = JSON.parse(localStorage.getItem(localStorageKey) || '[]');
     
-    values.find((item) => {
+    taskData.find((item) => {
         if(item.id === taskToIncompleteId) {
             item.toDo = true;
         }
     })
-    console.log(values);
 
     counter();
 }
@@ -214,30 +218,35 @@ function deleteTask(event) {
     const taskToDeleteId = deleteIcon.parentNode.id;
     const taskToDelete = document.getElementById(taskToDeleteId);
 
-    //taskData.find((item) => {
-    //    if(item.id === taskToIncompleteId) {
-    //        tasksList.removeChild(taskToDelete)
-    //    }
-    //})
+    taskData.find((item) => {
+        if(item.id === taskToDeleteId) {
+            tasksList.removeChild(taskToDelete)
+        }
+    })
 
-    let values = JSON.parse(localStorage.getItem(localStorageKey) || '[]')
-    let position = values.findIndex(x => x.id == taskToDeleteId)
-    values.splice(position, 1)
-    localStorage.setItem(localStorageKey, JSON.stringify(values));
-    tasksList.removeChild(taskToDelete)
+    //let values = JSON.parse(localStorage.getItem(localStorageKey) || '[]')
+    //let position = values.findIndex(x => x.id == taskToDeleteId)
+    //values.splice(position, 1)
+    //localStorage.setItem(localStorageKey, JSON.stringify(values));
+    //tasksList.removeChild(taskToDelete)
 
-    counter();
     verifyEmptyTasks();
-
+    counter();
 }
 
 //sync HTML with taskData 
 function showTasks() {
-    let values = JSON.parse(localStorage.getItem(localStorageKey) || '[]')
-    for (const task of values) {
-        let taskItem = createElement(task.name, task.id);
-        tasksList.appendChild(taskItem)
+
+    for(const task of taskData){
+            const taskItem = createElement(task.name, task.id);
+            tasksList.appendChild(taskItem)
     }
+
+    //let values = JSON.parse(localStorage.getItem(localStorageKey) || '[]')
+    //for (const task of values) {
+    //    let taskItem = createElement(task.name, task.id);
+    //    tasksList.appendChild(taskItem)
+    //}
 }
 
 showTasks();
