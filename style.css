@@ -29,9 +29,30 @@ button {
 }
 
 input:hover,
-button:hover {
+button:hover,
+i:hover {
     cursor: pointer;
 }
+
+.check-btn:hover{
+    color: #FFD231;
+    scale: 1.1;
+}
+
+.delete_btn:hover {
+    color: rgb(224, 0, 0);
+    scale: 1.1;
+}
+
+#add_button{
+    background-color: rgb(16, 111, 243);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
 
 header {
     display: flex;
@@ -47,6 +68,9 @@ header {
 }
 
 .new_task_form {
+    display: flex;
+    width: 500px;
+    justify-content: space-evenly;
     margin: 35px;
 }
 
@@ -79,7 +103,10 @@ header {
     height: 19px;
     border-radius: 999px;
 
+    font-weight: bolder;
+
     background-color: #FFD231;
+    color: #222222;
 }
 
 .tasks_done {
@@ -101,6 +128,8 @@ header {
     width: 25px;
     height: 19px;
     border-radius: 999px;
+    color: #222222;
+    font-weight: bolder;
     background-color: #3EA372;
 }
 
@@ -114,6 +143,12 @@ header {
     align-items: center;
     justify-content: space-evenly;
     margin-top: 10px;
+}
+
+.hr_line{
+    width: 700px;
+    border: solid 1px rgb(163, 163, 163);
+    margin-bottom: 25px;
 }
 
 /* -------------- Quando não tem tarefas cadastradas -------------- */

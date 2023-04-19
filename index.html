@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <title>Document</title>
 </head>
 <body>
@@ -19,9 +20,9 @@
     <main class="content">
         <form action="" class="new_task_form">
             <input type="text" name="" id="task_input">
-            <button type="submit" onclick="addNewTask(event)">Criar <i class="ph-bold ph-plus-circle"></i></button>
+            <button id="add_button" type="submit" onclick="addNewTask(event)">Criar <i class="ph-bold ph-plus-circle"></i></button>
         </form>
-        
+        <hr class="hr_line">
         <section class="tasks_counter">
             <div class="tasks_created">
                 <p>Tarefas criadas</p>
@@ -32,7 +33,6 @@
                 <span id="counter_tasks_done">0</span>
             </div>
         </section>
-        
         <section  id="empty_tasks" class="empty_tasks hidden">
             <img src="./assets/Group 6.png" alt="">
             <div>

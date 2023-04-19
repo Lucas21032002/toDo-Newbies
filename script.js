@@ -20,6 +20,7 @@ function verifyEmptyTasks() {
 
     if(values.length > 0) {
         emptyTasks.classList.add('hidden')
+        emptyTasks.classList.add('animate__bounceIn')
     }
 }
 verifyEmptyTasks();
@@ -55,6 +56,8 @@ function createElement(taskName, taskId, taskToDo) {
     let task = document.createElement('li');
 
     task.classList.add('task');
+    task.classList.add('animate__bounceIn');
+
 
     task.setAttribute("id", taskId);
 
