@@ -69,13 +69,15 @@ header {
 
 .new_task_form {
     display: flex;
-    width: 500px;
+    width: 70%;
+    max-width: 500px;
     justify-content: space-evenly;
     margin: 35px;
 }
 
 .tasks_counter {
-    width: 735px;
+    width: 70%;
+    max-width: 500px;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -146,7 +148,8 @@ header {
 }
 
 .hr_line{
-    width: 700px;
+    width: 70%;
+    max-width: 700px;
     border: solid 1px rgb(163, 163, 163);
     margin-bottom: 25px;
 }
@@ -158,7 +161,8 @@ header {
     align-items:center;
     margin-top: 35px;
     justify-content: space-around;
-    width: 735px;
+    width: 70%;
+    max-width: 735px;
 }
 
 .empty_tasks div p{
@@ -210,4 +214,22 @@ header {
 
 .hidden {
     display: none;
+}
+
+
+/* ------------- Media querys ------------- */
+
+@media screen and (max-width: 500px) {
+    .new_task_form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .tasks_counter {
+        display: flex;
+        justify-content: space-evenly;
+        flex: auto;
+        flex-direction: column;
+    }
 }

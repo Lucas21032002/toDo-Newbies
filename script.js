@@ -143,21 +143,27 @@ function addNewTask(event) {
 
     const newTaskName = input.value;
 
-    const newTask = {
-        id: randomId(),
-        name: newTaskName,
-        toDo: true
+    if(!newTaskName){
+        alert('Insira uma tarefa!!')
+    }
+    else {
+        const newTask = {
+            id: randomId(),
+            name: newTaskName,
+            toDo: true
+        }
+    
+        taskData.push(newTask);
+    
+        localStorage.setItem(localStorageKey, JSON.stringify(taskData));
+        //console.log(taskData)
+    
+        const taskElement = createElement(newTask.name, newTask.id);
+        tasksList.appendChild(taskElement);
+    
+        input.value = '';
     }
 
-    taskData.push(newTask);
-
-    localStorage.setItem(localStorageKey, JSON.stringify(taskData));
-    //console.log(taskData)
-
-    const taskElement = createElement(newTask.name, newTask.id);
-    tasksList.appendChild(taskElement);
-
-    input.value = '';
     verifyEmptyTasks();
     counter();
 }
